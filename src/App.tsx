@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Button, BaseCard, BaseModal } from './components';
+import { Button, BaseCard, CameraCaptureModal } from './components';
+import usePhotoCaptures from './hooks/usePhotoCaptures';
 import styles from './App.module.css';
 
 export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
+  const { captures, isLoading, error, addCapture, clearCaptures } = usePhotoCaptures();
 
   return (
     <main className={styles.page}>
@@ -18,8 +20,12 @@ export default function App() {
           </p>
 
           <div className={styles.actions}>
-            <Button type="button" size="lg" onClick={() => setIsModalOpen(true)}>
-              Open Modal
+            <Button
+              type="button"
+              size="lg"
+              onClick={() => setIsCameraModalOpen(true)}
+            >
+              Take New Photo
             </Button>
           </div>
         </div>
@@ -28,16 +34,30 @@ export default function App() {
       <section className={styles.emptyState}>
         <BaseCard className={styles.emptyCard}>
           <h2 className={styles.emptyTitle}>No captures yet</h2>
+
+          <p className={styles.emptyText}>
+            {isLoading
+              ? 'Checking local capture storage...'
+              : `${captures.length} saved capture${captures.length === 1 ? '' : 's'} in local browser storage.`}
+          </p>
+
+          {error ? <p className={styles.errorText}>{error}</p> : null}
+
+          {captures.length > 0 ? (
+            <div className={styles.emptyActions}>
+              <Button type="button" variant="danger" onClick={clearCaptures}>
+                Clear Saved Captures
+              </Button>
+            </div>
+          ) : null}
         </BaseCard>
       </section>
 
-      <BaseModal
-        isOpen={isModalOpen}
-        title="Open Modal"
-        onClose={() => setIsModalOpen(false)}
-      >
-        <p className={styles.modalText}>Open Modal</p>
-      </BaseModal>
+      <CameraCaptureModal
+        isOpen={isCameraModalOpen}
+        onClose={() => setIsCameraModalOpen(false)}
+        onSave={addCapture}
+      />
     </main>
   );
 }

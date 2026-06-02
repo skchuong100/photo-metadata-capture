@@ -108,6 +108,20 @@
   line-height: 1.7;
 }
 
+
+.emptyActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.errorText {
+  max-width: 38rem;
+  margin: 0.75rem auto 0;
+  color: #fecaca;
+  line-height: 1.7;
+}
+
 .drawerContent {
   color: #cbd5e1;
   line-height: 1.7;
