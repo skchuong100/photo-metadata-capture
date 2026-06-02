@@ -13,7 +13,7 @@
 
 .heroContent {
   display: flex;
-  min-height: 28rem;
+  min-height: 26rem;
   flex-direction: column;
   justify-content: center;
   padding: clamp(1.25rem, 4vw, 3rem);
@@ -22,15 +22,6 @@
   background: rgba(15, 23, 42, 0.62);
   box-shadow: 0 24px 80px rgba(2, 6, 23, 0.32);
   backdrop-filter: blur(18px);
-}
-
-.eyebrow {
-  margin: 0 0 1rem;
-  color: #93c5fd;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .title {
@@ -57,37 +48,29 @@
   margin-top: 2rem;
 }
 
-.summaryCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.25rem;
-}
-
-.cardTitle {
-  margin: 0 0 1rem;
-  color: #f8fafc;
-  font-size: 1.15rem;
-}
-
-.featureList {
-  display: grid;
-  gap: 0.85rem;
-  margin: 0;
-  padding: 0;
-  color: #cbd5e1;
-  list-style: none;
-}
-
-.featureList li {
-  padding: 0.85rem;
-  border: 1px solid rgba(226, 232, 240, 0.12);
-  border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.78);
-}
-
-.emptyState {
+.feedSection {
   margin-top: 1.25rem;
+}
+
+.feedHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feedTitle {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.feedDescription {
+  margin: 0.5rem 0 0;
+  color: #94a3b8;
+  line-height: 1.6;
 }
 
 .emptyCard {
@@ -108,38 +91,10 @@
   line-height: 1.7;
 }
 
-
-.emptyActions {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.25rem;
-}
-
 .errorText {
-  max-width: 38rem;
-  margin: 0.75rem auto 0;
+  margin: 0 0 1rem;
   color: #fecaca;
   line-height: 1.7;
-}
-
-.drawerContent {
-  color: #cbd5e1;
-  line-height: 1.7;
-}
-
-.drawerContent p {
-  margin: 0;
-}
-
-.planList {
-  display: grid;
-  gap: 0.8rem;
-  margin: 1.25rem 0 0;
-  padding-left: 1.25rem;
-}
-
-.planList li {
-  padding-left: 0.35rem;
 }
 
 @media (max-width: 860px) {
@@ -147,15 +102,16 @@
     padding: 1rem 0 2rem;
   }
 
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
   .heroContent {
     min-height: auto;
   }
 
   .actions {
+    flex-direction: column;
+  }
+
+  .feedHeader {
+    align-items: stretch;
     flex-direction: column;
   }
 }

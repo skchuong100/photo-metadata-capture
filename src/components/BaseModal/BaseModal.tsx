@@ -3,12 +3,15 @@ import type { ReactNode } from 'react';
 import Button from '../Button/Button';
 import styles from './BaseModal.module.css';
 
+type BaseModalSize = 'md' | 'lg';
+
 type BaseModalProps = {
   isOpen: boolean;
   title: string;
   children: ReactNode;
   onClose: () => void;
   footer?: ReactNode;
+  size?: BaseModalSize;
 };
 
 const focusableSelector =
@@ -20,6 +23,7 @@ export default function BaseModal({
   children,
   onClose,
   footer,
+  size = 'md',
 }: BaseModalProps) {
   const titleId = useId();
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -100,7 +104,7 @@ export default function BaseModal({
     <div className={styles.overlay} role="presentation" onMouseDown={onClose}>
       <section
         ref={modalRef}
-        className={styles.modal}
+        className={[styles.modal, styles[size]].join(' ')}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

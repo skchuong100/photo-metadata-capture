@@ -1,4 +1,4 @@
-export type PhotoCaptureSource = 'camera';
+export type PhotoCaptureSource = 'camera' | 'development-sample';
 
 export type PhotoCaptureLocation = {
   latitude: number | null;
@@ -15,6 +15,8 @@ export type PhotoCaptureImageMetadata = {
   height: number;
   fileSize: number;
   mimeType: string;
+  bitDepth?: number | null;
+  bitsPerChannel?: number | null;
 };
 
 export type PhotoCapture = {

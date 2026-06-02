@@ -19,6 +19,8 @@ type CapturedPreview = {
   height: number;
   mimeType: string;
   fileSize: number;
+  bitDepth: number;
+  bitsPerChannel: number;
 };
 
 const cameraUnavailableMessage =
@@ -114,6 +116,8 @@ function createImageBlobFromVideo(video: HTMLVideoElement) {
           height,
           mimeType: blob.type || 'image/jpeg',
           fileSize: blob.size,
+          bitDepth: 24,
+          bitsPerChannel: 8,
         });
       },
       'image/jpeg',
@@ -247,6 +251,8 @@ export default function CameraCaptureModal({
           height: preview.height,
           fileSize: preview.fileSize,
           mimeType: preview.mimeType,
+          bitDepth: preview.bitDepth,
+          bitsPerChannel: preview.bitsPerChannel,
         },
       });
 
