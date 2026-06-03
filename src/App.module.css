@@ -1,0 +1,117 @@
+.page {
+  width: min(1180px, calc(100% - 2rem));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.hero {
+  display: grid;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.heroContent {
+  display: flex;
+  min-height: 26rem;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  border: 1px solid rgba(226, 232, 240, 0.16);
+  border-radius: 1.75rem;
+  background: rgba(15, 23, 42, 0.62);
+  box-shadow: 0 24px 80px rgba(2, 6, 23, 0.32);
+  backdrop-filter: blur(18px);
+}
+
+.title {
+  max-width: 48rem;
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(2.6rem, 8vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.08em;
+}
+
+.description {
+  max-width: 46rem;
+  margin: 1.35rem 0 0;
+  color: #cbd5e1;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.feedSection {
+  margin-top: 1.25rem;
+}
+
+.feedHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feedTitle {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.feedDescription {
+  margin: 0.5rem 0 0;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.emptyCard {
+  padding: 3rem 1.25rem;
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.4rem;
+}
+
+.emptyText {
+  max-width: 38rem;
+  margin: 0.75rem auto 0;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+.errorText {
+  margin: 0 0 1rem;
+  color: #fecaca;
+  line-height: 1.7;
+}
+
+@media (max-width: 860px) {
+  .page {
+    padding: 1rem 0 2rem;
+  }
+
+  .heroContent {
+    min-height: auto;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .feedHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

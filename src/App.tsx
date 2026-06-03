@@ -1,122 +1,135 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import {
+  BaseCard,
+  Button,
+  CameraCaptureModal,
+  MasonryPhotoFeed,
+  PhotoDetailsModal,
+} from './components';
+import usePhotoCaptures from './hooks/usePhotoCaptures';
+import { createSampleCaptures } from './lib/createSampleCaptures';
+import type { PhotoCapture } from './types/photoCapture';
+import styles from './App.module.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
+  const [selectedCapture, setSelectedCapture] = useState<PhotoCapture | null>(null);
+  const [isSeedingSampleCaptures, setIsSeedingSampleCaptures] = useState(false);
+  const [sampleCaptureError, setSampleCaptureError] = useState<string | null>(null);
+  const { captures, isLoading, error, addCapture, clearCaptures } = usePhotoCaptures();
+  const canSeedSampleCaptures = import.meta.env.DEV;
+
+  function handleClearCaptures() {
+    setSelectedCapture(null);
+    void clearCaptures();
+  }
+
+  async function handleSeedSampleCaptures() {
+    try {
+      setIsSeedingSampleCaptures(true);
+      setSampleCaptureError(null);
+      const sampleCaptures = await createSampleCaptures();
+
+      for (const sampleCapture of sampleCaptures) {
+        await addCapture(sampleCapture);
+      }
+    } catch (seedError) {
+      setSampleCaptureError(
+        seedError instanceof Error
+          ? seedError.message
+          : 'Unable to create sample captures.'
+      );
+    } finally {
+      setIsSeedingSampleCaptures(false);
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+    <main className={styles.page}>
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.title}>Field Photo Metadata Capture</h1>
+
+          <p className={styles.description}>
+            Take a photo using the device camera, capture GPS coordinates and
+            timestamp metadata, then review each capture in a polished photo
+            feed.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+          <div className={styles.actions}>
+            <Button
+              type="button"
+              size="lg"
+              onClick={() => setIsCameraModalOpen(true)}
+            >
+              Take New Photo
+            </Button>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+            {canSeedSampleCaptures ? (
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                isLoading={isSeedingSampleCaptures}
+                onClick={handleSeedSampleCaptures}
+              >
+                Seed Random Samples
+              </Button>
+            ) : null}
+          </div>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <section className={styles.feedSection} aria-labelledby="feed-title">
+        <div className={styles.feedHeader}>
+          <div>
+            <h2 className={styles.feedTitle} id="feed-title">
+              Captured Photos
+            </h2>
+
+            <p className={styles.feedDescription}>
+              {isLoading
+                ? 'Checking local capture storage...'
+                : `${captures.length} saved capture${captures.length === 1 ? '' : 's'} in local browser storage.`}
+            </p>
+          </div>
+
+          {captures.length > 0 ? (
+            <Button type="button" variant="danger" onClick={handleClearCaptures}>
+              Clear Saved Captures
+            </Button>
+          ) : null}
+        </div>
+
+        {error ? <p className={styles.errorText}>{error}</p> : null}
+        {sampleCaptureError ? (
+          <p className={styles.errorText}>{sampleCaptureError}</p>
+        ) : null}
+
+        {captures.length > 0 ? (
+          <MasonryPhotoFeed captures={captures} onViewMore={setSelectedCapture} />
+        ) : (
+          <BaseCard className={styles.emptyCard}>
+            <h3 className={styles.emptyTitle}>No captures yet</h3>
+
+            <p className={styles.emptyText}>
+              Take a new photo to populate the masonry feed.
+            </p>
+          </BaseCard>
+        )}
+      </section>
+
+      <CameraCaptureModal
+        isOpen={isCameraModalOpen}
+        onClose={() => setIsCameraModalOpen(false)}
+        onSave={addCapture}
+      />
+
+      <PhotoDetailsModal
+        capture={selectedCapture}
+        isOpen={selectedCapture !== null}
+        onClose={() => setSelectedCapture(null)}
+      />
+    </main>
+  );
 }
-
-export default App
