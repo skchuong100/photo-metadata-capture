@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(2, 6, 23, 0.68);
+  background: rgba(17, 24, 39, 0.54);
   backdrop-filter: blur(10px);
 }
 
@@ -15,10 +15,10 @@
   max-height: min(90vh, 48rem);
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(226, 232, 240, 0.18);
+  border: 1px solid #e5e7eb;
   border-radius: 1.4rem;
-  background: #020617;
-  box-shadow: 0 28px 90px rgba(2, 6, 23, 0.58);
+  background: #ffffff;
+  box-shadow: 0 28px 90px rgba(17, 24, 39, 0.24);
 }
 
 .md {
@@ -36,14 +36,50 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.25rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.12);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .title {
   margin: 0;
-  color: #f8fafc;
+  color: #111827;
   font-size: clamp(1.1rem, 2.5vw, 1.45rem);
   line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.closeButton {
+  display: inline-flex;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: #4b5563;
+  background: transparent;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.closeButton svg {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.closeButton:hover {
+  color: #111827;
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.closeButton:focus-visible {
+  outline: 3px solid rgba(124, 58, 237, 0.38);
+  outline-offset: 3px;
 }
 
 .body {
@@ -59,7 +95,8 @@
   justify-content: flex-end;
   gap: 0.75rem;
   padding: 1.25rem;
-  border-top: 1px solid rgba(226, 232, 240, 0.12);
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
 }
 
 @media (max-width: 640px) {

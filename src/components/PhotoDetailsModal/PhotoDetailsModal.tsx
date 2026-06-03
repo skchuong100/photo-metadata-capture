@@ -5,6 +5,8 @@ import {
   formatCameraSource,
   formatDateTime,
   formatFileSize,
+  formatMegapixels,
+  formatOrientation,
 } from '../../lib/formatPhotoCapture';
 import useObjectUrl from '../../hooks/useObjectUrl';
 import BaseModal from '../BaseModal/BaseModal';
@@ -26,6 +28,14 @@ function getPhotoMetadataItems(capture: PhotoCapture) {
     {
       label: 'Image dimensions',
       value: `${capture.image.width} x ${capture.image.height}`,
+    },
+    {
+      label: 'Megapixels',
+      value: formatMegapixels(capture.image.width, capture.image.height),
+    },
+    {
+      label: 'Orientation',
+      value: formatOrientation(capture.image.width, capture.image.height),
     },
     {
       label: 'Aspect ratio',

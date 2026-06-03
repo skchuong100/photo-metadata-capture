@@ -14,8 +14,6 @@ type MasonryPhotoFeedItemProps = {
 };
 
 const gridRowHeight = 8;
-const gridGap = 16;
-const gridRowUnit = gridRowHeight + gridGap;
 
 function MasonryPhotoFeedItem({ capture, onViewMore }: MasonryPhotoFeedItemProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -32,9 +30,13 @@ function MasonryPhotoFeedItem({ capture, onViewMore }: MasonryPhotoFeedItemProps
 
     function updateRowSpan() {
       const height = element.getBoundingClientRect().height;
+      const parentGrid = element.parentElement?.parentElement;
+      const rowGap = parentGrid
+        ? Number.parseFloat(window.getComputedStyle(parentGrid).rowGap) || 0
+        : 0;
       const nextRowSpan = Math.max(
         1,
-        Math.ceil((height + gridGap) / gridRowUnit)
+        Math.ceil((height + rowGap) / (gridRowHeight + rowGap))
       );
 
       setRowSpan(nextRowSpan);

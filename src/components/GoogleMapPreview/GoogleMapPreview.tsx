@@ -92,7 +92,7 @@ export default function GoogleMapPreview({
 
         <div>
           <span className={styles.label}>Estimated location accuracy</span>
-          <p className={styles.value}>{accuracyLabel}</p>
+          <p className={styles.value}>Within: {accuracyLabel}</p>
         </div>
 
       </div>

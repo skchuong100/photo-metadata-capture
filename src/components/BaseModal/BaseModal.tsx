@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef } from 'react';
 import type { ReactNode } from 'react';
-import Button from '../Button/Button';
+import { IoCloseOutline } from 'react-icons/io5';
 import styles from './BaseModal.module.css';
 
 type BaseModalSize = 'md' | 'lg';
@@ -115,9 +115,14 @@ export default function BaseModal({
             {title}
           </h2>
 
-          <Button variant="ghost" size="sm" type="button" onClick={onClose}>
-            Close
-          </Button>
+          <button
+            className={styles.closeButton}
+            type="button"
+            aria-label="Close modal"
+            onClick={onClose}
+          >
+            <IoCloseOutline aria-hidden="true" />
+          </button>
         </header>
 
         <div className={styles.body}>{children}</div>
