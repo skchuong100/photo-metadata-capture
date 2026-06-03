@@ -85,16 +85,6 @@ The app reads the Google Maps key from:
 VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 ```
 
-Because this is a frontend-only Vite app, the Google Maps key is included in the browser bundle. Restrict the key in Google Cloud Console before deploying.
-
-Recommended key restrictions:
-
-- Application restriction: HTTP referrers
-- API restriction: Google Maps Embed API
-- Local referrer: `http://localhost:*/*`
-- Deployed referrer: your GitHub Pages URL
-
-If the key is missing, the app still shows the captured coordinates and accuracy, but the embedded Google Map will not load.
 
 ## Browser Permissions
 
