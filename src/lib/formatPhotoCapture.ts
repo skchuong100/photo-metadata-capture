@@ -61,6 +61,33 @@ export function formatAspectRatio(width: number, height: number) {
   return `${width / divisor}:${height / divisor}`;
 }
 
+
+export function formatMegapixels(width: number, height: number) {
+  if (!width || !height) {
+    return 'Unavailable';
+  }
+
+  const megapixels = (width * height) / 1_000_000;
+
+  return `${megapixels.toFixed(2)} MP`;
+}
+
+export function formatOrientation(width: number, height: number) {
+  if (!width || !height) {
+    return 'Unavailable';
+  }
+
+  if (width > height) {
+    return 'Landscape';
+  }
+
+  if (height > width) {
+    return 'Portrait';
+  }
+
+  return 'Square';
+}
+
 export function formatBitDepth(
   bitDepth: number | null | undefined,
   bitsPerChannel: number | null | undefined
