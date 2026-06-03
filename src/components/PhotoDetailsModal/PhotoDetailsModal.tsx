@@ -3,13 +3,12 @@ import {
   formatAspectRatio,
   formatBitDepth,
   formatCameraSource,
-  formatCoordinate,
   formatDateTime,
   formatFileSize,
-  formatMeters,
 } from '../../lib/formatPhotoCapture';
 import useObjectUrl from '../../hooks/useObjectUrl';
 import BaseModal from '../BaseModal/BaseModal';
+import GoogleMapPreview from '../GoogleMapPreview/GoogleMapPreview';
 import MetadataList from '../MetadataList/MetadataList';
 import styles from './PhotoDetailsModal.module.css';
 
@@ -37,17 +36,6 @@ function getPhotoMetadataItems(capture: PhotoCapture) {
     {
       label: 'Bit depth',
       value: formatBitDepth(capture.image.bitDepth, capture.image.bitsPerChannel),
-    },
-  ];
-}
-
-function getLocationItems(capture: PhotoCapture) {
-  return [
-    { label: 'Latitude', value: formatCoordinate(capture.location.latitude) },
-    { label: 'Longitude', value: formatCoordinate(capture.location.longitude) },
-    {
-      label: 'Estimated location accuracy',
-      value: formatMeters(capture.location.accuracy),
     },
   ];
 }
@@ -88,7 +76,11 @@ export default function PhotoDetailsModal({
               Location
             </h3>
 
-            <MetadataList items={getLocationItems(capture)} />
+            <GoogleMapPreview
+              latitude={capture.location.latitude}
+              longitude={capture.location.longitude}
+              accuracy={capture.location.accuracy}
+            />
           </section>
         </div>
       ) : null}

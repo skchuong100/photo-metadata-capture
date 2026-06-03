@@ -2,6 +2,7 @@ export { default as Button } from './Button/Button';
 export { default as BaseCard } from './BaseCard/BaseCard';
 export { default as BaseModal } from './BaseModal/BaseModal';
 export { default as CameraCaptureModal } from './CameraCaptureModal/CameraCaptureModal';
+export { default as GoogleMapPreview } from './GoogleMapPreview/GoogleMapPreview';
 export { default as MasonryPhotoFeed } from './MasonryPhotoFeed/MasonryPhotoFeed';
 export { default as MetadataList } from './MetadataList/MetadataList';
 export { default as PhotoCard } from './PhotoCard/PhotoCard';
