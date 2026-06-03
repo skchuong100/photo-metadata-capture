@@ -35,6 +35,9 @@ Before running the project locally, make sure you have:
 
 Camera and GPS access require a secure browser context. They work on `localhost` during local development and should also work on an HTTPS deployment such as GitHub Pages.
 
+## Live Demo
+[View the deployed app](https://skchuong100.github.io/photo-metadata-capture/)
+
 ## Run Locally
 
 Clone the repository:
