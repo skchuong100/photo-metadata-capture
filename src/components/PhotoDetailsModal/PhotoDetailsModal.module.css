@@ -7,9 +7,9 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid rgba(226, 232, 240, 0.14);
+  border: 1px solid #e5e7eb;
   border-radius: 1.2rem;
-  background: #020617;
+  background: #f3f4f6;
 }
 
 .image {
@@ -24,8 +24,8 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  color: #cbd5e1;
-  font-weight: 700;
+  color: #4b5563;
+  font-weight: 800;
 }
 
 .metadataSection {
@@ -35,6 +35,7 @@
 
 .sectionTitle {
   margin: 0;
-  color: #f8fafc;
+  color: #111827;
   font-size: 1.15rem;
+  letter-spacing: -0.03em;
 }

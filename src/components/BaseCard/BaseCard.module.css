@@ -1,8 +1,7 @@
 .card {
   overflow: hidden;
-  border: 1px solid rgba(226, 232, 240, 0.16);
-  border-radius: 1.35rem;
-  background: rgba(15, 23, 42, 0.72);
-  box-shadow: 0 22px 65px rgba(2, 6, 23, 0.28);
-  backdrop-filter: blur(18px);
+  border: 1px solid #eee7df;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  box-shadow: none;
 }

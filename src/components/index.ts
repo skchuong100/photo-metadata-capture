@@ -7,3 +7,4 @@ export { default as MasonryPhotoFeed } from './MasonryPhotoFeed/MasonryPhotoFeed
 export { default as MetadataList } from './MetadataList/MetadataList';
 export { default as PhotoCard } from './PhotoCard/PhotoCard';
 export { default as PhotoDetailsModal } from './PhotoDetailsModal/PhotoDetailsModal';
+export { default as Topbar } from './Topbar/Topbar';
